@@ -136,7 +136,7 @@ Az alkalmazás futtatható lokálisan egy Java-t támogató környezetben. A fel
   - A felhasználó által végrehajtott műveletek automatikusan mentésre kerülhetnek, illetve manuálisan is kezdeményezhetők.
 
 ## 8. Adatbázis terv
-![AdatBTerv](github.com/MRekaa/Wi-Wi-Wi-/blob/main/Images/AdatBTerv.png)
+![AdatBTerv](https://github.com/MRekaa/Wi-Wi-Wi-/blob/main/Images/AdatBTerv.png)
 ## 9. Implementációs terv
 A projektet két részből áll: frontend, backend. A frontend Java Swing segítségével készül, míg a backend Java keretrendszerben.
 A program kódjában használt nyelv az angol.
