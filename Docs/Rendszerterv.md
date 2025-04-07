@@ -36,11 +36,39 @@ Az alkalmazás célja egy kerttervezó illetve karbantartó szimuláció, amelyb
 Az alkalmazás regisztráció vagy bejelentkezés nélkül használható. Minden felhasználó ugyanolyan jogkörrel rendelkezik.
 
 ### 3.1 Üzleti szereplők
-Az alkalmazás indulását követően a felhasználónak meg kell adnia a tervezendő kert méretét méterben.
-TODO
+Az alkalmazás elsődleges szereplői a következők:
+-Felhasználó:
+A felhasználó az alkalmazás egyetlen aktív szereplője, aki:
+  - Megadja a tervezendő kert méretét.
+  - Növényeket helyez el a kert különböző pontjaira.
+  - Módosíthatja, áthelyezheti, vagy törölheti a növényeket.
+  - Ellenőrizheti a növények igényeit.
+  - Elmentheti a kész tervet.
+  - Később újra betöltheti a mentett terveket.
+
+
 
 ### 3.2 Üzleti folyamatok
-TODO
+Az alkalmazás indulását követően a felhasználónak meg kell adnia a kert méretét a funkciók eléréséhez.
+- Általános folyamatok:
+  - Kertméret megadása a tervezés megkezdéséhez.
+  - Mentett kertterv betöltése.
+  - A terv mentése fájlba vagy adatbázisba.
+  - A programból való kilépés.
+
+- Tervezési folyamatok:
+  - Növény kiválasztása és elhelyezése a kert megfelelő pontjára.
+  - Növény elmozgatása a kerten belül.
+  - Növény módosítása (pl. fajtaváltás, paraméterek).
+  - Növény eltávolítása.
+
+- Áttekintési folyamatok:
+  - A kert teljes tervének megtekintése.
+  - A növények egyedi igényeinek (fény-, víz-, talajigény) ellenőrzése.
+  - A terv értékelése, esetleges módosítás visszalépéssel.
+
+
+
 
 ## 4. Követelmények
 
@@ -96,10 +124,19 @@ Szerver (Host) gép: Az adatbázis rendszer és a háttérfolyamatokat ellátó 
 - MySQL alapú adatbázis rendszer.
 
 ### 7.2 A program elérése, kezelése
-TODO
+Az alkalmazás futtatható lokálisan egy Java-t támogató környezetben. A felhasználók az alábbi módon érhetik el és kezelhetik a programot:
+- Elérés:
+  - Az alkalmazás telepítése után a felhasználó egyszerűen elindíthatja a fő futtatható fájl (JAR) segítségével.
+  - Nincs szükség internetkapcsolatra a működéshez, mivel a rendszer helyben fut.
+
+-Kezelés:
+  - A grafikus kezelőfelület (Java Swing) segítségével történik az interakció.
+  - A menürendszer átlátható, a felhasználó egyszerűen navigálhat a különböző funkciók között (új kert, betöltés, tervezés, mentés, kilépés).
+  - A háttérben futó backend komponens (Java backend + MySQL) végzi a mentést, betöltést és egyéb adatkezelési műveleteket.
+  - A felhasználó által végrehajtott műveletek automatikusan mentésre kerülhetnek, illetve manuálisan is kezdeményezhetők.
 
 ## 8. Adatbázis terv
-
+![AdatBTerv](github.com/MRekaa/Wi-Wi-Wi-/blob/main/Images/AdatBTerv.png)
 ## 9. Implementációs terv
 A projektet két részből áll: frontend, backend. A frontend Java Swing segítségével készül, míg a backend Java keretrendszerben.
 A program kódjában használt nyelv az angol.
