@@ -2,40 +2,37 @@ package org.garden.model;
 
 public class PlantType {
     private final String name;
-    private final String lightRequirement;
-    private final String waterRequirement;
-    private final String soilRequirement;
+    private final CareInstruction care;
 
-    public PlantType(String name) {
+    public PlantType(String name, CareInstruction care) {
         this.name = name;
-
-        // Egyszerű példa: keménykódolt igények típustól függően
-        switch (name.toLowerCase()) {
-            case "rose" -> {
-                lightRequirement = "Sok fény";
-                waterRequirement = "Közepes vízigény";
-                soilRequirement = "Semleges talaj";
-            }
-            case "sunflower" -> {
-                lightRequirement = "Teljes napfény";
-                waterRequirement = "Magas vízigény";
-                soilRequirement = "Laza, tápdús talaj";
-            }
-            case "tulip" -> {
-                lightRequirement = "Félárnyék";
-                waterRequirement = "Alacsony vízigény";
-                soilRequirement = "Homokos talaj";
-            }
-            default -> {
-                lightRequirement = "Ismeretlen";
-                waterRequirement = "Ismeretlen";
-                soilRequirement = "Ismeretlen";
-            }
-        }
+        this.care = care;
     }
 
-    public String getName() { return name;}
-    public String getLightRequirement() {return lightRequirement;}
-    public String getWaterRequirement() {return waterRequirement;}
-    public String getSoilRequirement() {return soilRequirement;}
+    public String getName() {
+        return name;
+    }
+
+    public String getLightRequirement() {
+        return care.getLight();
+    }
+
+    public String getWaterRequirement() {
+        return care.getWater();
+    }
+
+    public String getSoilRequirement() {
+        return care.getSoil();
+    }
+
+    public CareInstruction getCareInstruction() {
+        return care;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (Fény: " + getLightRequirement()
+                + ", Víz: " + getWaterRequirement()
+                + ", Talaj: " + getSoilRequirement() + ")";
+    }
 }

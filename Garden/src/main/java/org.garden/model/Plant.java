@@ -21,12 +21,12 @@ public class Plant {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Plant plant)) return false;
-        return Objects.equals(type, plant.type);
+        return row == plant.row && col == plant.col && Objects.equals(type, plant.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, type);
+        return Objects.hash(type, row, col);
     }
 
     @Override

@@ -21,28 +21,59 @@ public class GardenEditController {
     }
 
     private void initListeners() {
-        for (int i = 0; i < garden.getRows(); i++) {
-            for (int j = 0; j < garden.getCols(); j++) {
-                final int row = i;
-                final int col = j;
+        for (int row = 0; row < garden.getRows(); row++) {
+            for (int col = 0; col < garden.getCols(); col++) {
+                JButton cellButton = view.getGridButton(row, col);
 
-                view.addGridButtonListener(row, col, e -> {
+                Plant plant = garden.getPlantAt(row, col);
+                if (plant != null) {
+                    cellButton.setText(plant.getType().getName());
+                }
+
+                final int r = row;
+                final int c = col;
+
+                // Bal klikk → növény ültetés
+                cellButton.addActionListener(e -> {
                     PlantDialogController dialog = new PlantDialogController();
                     PlantType selectedType = dialog.showPlantSelectionDialog(view);
 
                     if (selectedType != null) {
-                        Plant plant = new Plant(selectedType, row, col);
-                        garden.placePlant(row, col, plant);
-                        view.getGridButton(row, col).setText(selectedType.getName());
+                        Plant newPlant = new Plant(selectedType, r, c);
+                        garden.placePlant(r, c, newPlant);
+                        cellButton.setText(selectedType.getName());
+                    }
+                });
+
+                // Jobb klikk → információ
+                cellButton.addMouseListener(new java.awt.event.MouseAdapter() {
+                    @Override
+                    public void mousePressed(java.awt.event.MouseEvent e) {
+                        if (SwingUtilities.isRightMouseButton(e)) {
+                            Plant p = garden.getPlantAt(r, c);
+                            if (p != null) {
+                                PlantType type = p.getType();
+                                String info = "Növény: " + type.getName() + "\n"
+                                        + "Fényigény: " + type.getLightRequirement() + "\n"
+                                        + "Víz: " + type.getWaterRequirement() + "\n"
+                                        + "Talaj: " + type.getSoilRequirement();
+                                JOptionPane.showMessageDialog(view, info, "Növény információ", JOptionPane.INFORMATION_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(view, "Nincs növény ezen a mezőn.");
+                            }
+                        }
                     }
                 });
             }
         }
 
+
         view.addSaveButtonListener(e -> {
             GardenRepository repo = new GardenRepository();
             try {
-                repo.saveGarden(garden, "TesztKert");
+                int gardenId = garden.getId();  // -1 vagy 0, ha új kert
+                gardenId = repo.saveGarden(garden, "TesztKert", gardenId);
+                garden.setId(gardenId); // frissítés mentés után
                 JOptionPane.showMessageDialog(view, "Mentés sikeres!");
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(view, "Mentés sikertelen: " + ex.getMessage());
